@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id ="container">
+        <div id="box">
+            <section id="top">
+                <div class = "top-bar">
+                    <h1>DO IT!</h1>
+                </div>
+                <div class="task-area">
+                    <nav class="nav task-tabs">
+                        <div id="under-line"></div>
+                        <a id="all" class="nav-link active" aria-current="page" href="#">ALL</a>
+                        <a id="ongoing" class="nav-link" href="#">ONGOING</a>
+                        <a id="done" class="nav-link" href="#">DONE</a>
+                        <a id="today" class="nav-link" href="#">TODAY</a>
+                        <a id="star" class="nav-link tab-star" href="#">★</a>
+                    </nav>
+                </div>
+            </section>
+                
+            <section id="main">
+                
+            </section>
+                
+            <section id="footer">
+                <div class="insert-area">
+                    <!--엔터키 이벤트는 inputBox에 걸기! (버튼에 이벤트 X)-->
+                    <input type="text" id="task-content" class="ibx-insert" onkeyup="enterKey(event)"/>
+                     <button id="add-button" class="btn-insert btn-area">INSERT</button>
+                </div>
+            </section>
+        </div>  <!--box-->
+    </div>  <!--container-->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+@font-face {
+    font-family: 'SOYOMapleBoldTTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/SOYOMapleBoldTTF.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    font-family: 'SOYOMapleBoldTTF';
+}
+
+#box {
+    border: 3px solid black;
+    border-radius: 20px 8px 20px 8px;
+    width: 440px;
+    height: 630px;
+    margin: 40px auto;
+}
+
+.btn-area {
+    border-radius: 5px;
+    background-color: aliceblue;
+}
+
+/* top */
+#top {
+    width: 440px;
+    height: 100px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 8px;
+}
+
+#under-line {
+    height: 4px;
+    background-color: pink;
+    position: absolute;
+    width: 0;
+    top: 0;
+    margin-left: 5px;
+    padding: 0px;
+    transition: 0.5s;
+}
+
+.tab-star {
+    margin-top: -7px;
+    font-size: 25px;
+}
+
+.list-star {
+    text-decoration: none;
+}
+
+.star:hover {
+
+}
+
+/* main */
+#main {
+    height: 470px;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em;
+}
+
+.task-done {
+    text-decoration: line-through;
+    background-color: lightgray;
+    border-radius: 5px;
+}
+
+.task-star {
+    border: 3px solid pink;
+    border-radius: 5px;
+}
+
+/* footer */
+#footer {
+    height: 60px;
+}
+
+.insert-area {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.ibx-insert {
+    border-radius: 5px;
+}
+
+.btn-insert {
+    margin-left: 8px;
+    border-radius: 5px;
+}
+
+.btn-insert:hover {
+    background-color: antiquewhite;
+}
