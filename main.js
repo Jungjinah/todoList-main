@@ -1,7 +1,8 @@
 /*
 * top
-- 즐겨찾기
-- ALL TODAY YEAR TRAVEL
+- ALL ONGOING DONE TODAY ★
+ => TODAY : 오늘의 날짜만 정렬
+ => ★ : 즐겨찾기 (중요한 일정 정렬)
 
 * main
 - 리스트 생성 (with 오늘 날짜)
@@ -28,9 +29,9 @@ let today = new Date();
 let month = today.getMonth() + 1;
 let date = today.getDate();
 
-//탭 클릭 이벤트
-// tabs.forEach(menu=>menu.addEventListener("click", (e)=>filter(e)));
+// document.getElementById("all").focus();
 
+//탭 클릭 이벤트
 for(let i=0; i < tabs.length; i++) {
     let list = '';
     tabs[i].addEventListener("click", function(event) {
@@ -46,16 +47,18 @@ function addTask() {
     let task =  {
         id: randomIDGenerate(),
         content: taskContent.value,
-        isComplete: false
+        isComplete: false,
+        days: month + "." + date
     }
 
     if(task.content == null || task.content == "") { 
         alert("할 일을 입력하시오")
+    } else if (task.content.length > 10) {
+        alert("10글자 이내로 입력하시오")
     } else {
         taskList.push(task);
         render();
-    }
-
+    }    
     taskContent.focus();
 }
 
@@ -65,68 +68,69 @@ function render() {
     let list = [];
     if(mode === "all") {
        list = taskList;
-    } else if (mode === "ongoing" || mode === "done" || mode ==="star") {
+    } else if (mode === "ongoing" || mode === "done" || mode ==="star" || mode === "today") {
         list = filterList;
     }
     
     //함수 안에 변수를 넣을 떈 ${}를 뺵틱으로 감싸야함!
     for(let i=0; i < list.length; i++) {
-        console.log(list[i]);
         if(list[i].isComplete === true) {
             if (list[i].isStar === true) {
-                console.log("여기!!");
                 resultHTML += `<div class="task">
                     <div class="task-star task-done">
+                    <span> [ </span>
                     ${month + "." + date}
-                        <span> | </span>
+                        <span> ] </span>
                         ${list[i].content}
                     </div>
                     <div>
-                        <button onclick="toggleComplete('${list[i].id}')" class="btn-area">CHECK</button>
-                        <button onclick="deleteTask('${list[i].id}')" class="btn-area">DELETE</button>
-                        <button onclick="starTask('${list[i].id}')" class="btn-area">★</button>
+                        <button onclick="toggleComplete('${list[i].id}')" class="btn-are btn-chk">CHECK</button>
+                        <button onclick="deleteTask('${list[i].id}')" class="btn-area btn-delete">DELETE</button>
+                        <button onclick="starTask('${list[i].id}')" class="btn-area btn-star">★</button>
                     </div>
                 </div>`;
             } else {
             resultHTML += `<div class="task">
                 <div class="task-done">
+                <span> [ </span>
                 ${month + "." + date}
-                    <span> | </span>
+                    <span> ] </span>
                     ${list[i].content}
                 </div>
                 <div>
-                    <button onclick="toggleComplete('${list[i].id}')" class="btn-area">CHECK</button>
-                    <button onclick="deleteTask('${list[i].id}')" class="btn-area">DELETE</button>
-                    <button onclick="starTask('${list[i].id}')" class="btn-area">★</button>
+                    <button onclick="toggleComplete('${list[i].id}')" class="btn-area btn-chk">CHECK</button>
+                    <button onclick="deleteTask('${list[i].id}')" class="btn-area btn-delete">DELETE</button>
+                    <button onclick="starTask('${list[i].id}')" class="btn-area btn-star">★</button>
                 </div>
             </div>`;
-        }
+            }
         } else if(list[i].isComplete === false) {
             if (list[i].isStar === true) {
-                console.log("여기!!");
                 resultHTML += `<div class="task">
                     <div class="task-star task-ongoing">
+                    <span> [ </span>
                     ${month + "." + date}
-                        <span> | </span>
+                        <span> ] </span>
                         ${list[i].content}
                     </div>
                     <div>
-                        <button onclick="toggleComplete('${list[i].id}')" class="btn-area">CHECK</button>
-                        <button onclick="deleteTask('${list[i].id}')" class="btn-area">DELETE</button>
-                        <button onclick="starTask('${list[i].id}')" class="btn-area">★</button>
+                        <button onclick="toggleComplete('${list[i].id}')" class="btn-area btn-chk">CHECK</button>
+                        <button onclick="deleteTask('${list[i].id}')" class="btn-area btn-delete">DELETE</button>
+                        <button onclick="starTask('${list[i].id}')" class="btn-area btn-star">★</button>
                     </div>
                 </div>`;
             } else {
                 resultHTML += `<div class="task">
                     <div class="task-ongoing">
+                    <span> [ </span>
                     ${month + "." + date}
-                        <span> | </span>
+                        <span> ] </span>
                         ${list[i].content}
                     </div>
                     <div>
-                        <button onclick="toggleComplete('${list[i].id}')" class="btn-area">CHECK</button>
-                        <button onclick="deleteTask('${list[i].id}')" class="btn-area">DELETE</button>
-                        <button onclick="starTask('${list[i].id}')" class="btn-area">★</button>
+                        <button onclick="toggleComplete('${list[i].id}')" class="btn-area btn-chk">CHECK</button>
+                        <button onclick="deleteTask('${list[i].id}')" class="btn-area btn-delete">DELETE</button>
+                        <button onclick="starTask('${list[i].id}')" class="btn-area btn-star">★</button>
                     </div>
                 </div>`;
             }
@@ -178,26 +182,33 @@ function randomIDGenerate() {
 
 //리스트 삭제
 function deleteTask(id) {
-    for(let i=0; i < taskList.length; i++) {
-        if(taskList[i].id == id) {
-            //배열 리스트에서 id 삭제
-            taskList.splice(i, 1);
-            break;
+    if(id != null || id != "") {
+        let chkY = confirm("정말 삭제하시겠습니까?");
+        if(chkY) {
+            for(let i=0; i < taskList.length; i++) {
+                if(taskList[i].id == id) {
+                    //배열 리스트에서 id 삭제
+                    taskList.splice(i, 1);
+                }
+            }
+            filter();
         }
     }
-    filter();
 }
 
 //즐겨찾기
 function starTask(id) {
-    for(let i=0; i < taskList.length; i++) {
-        if(taskList[i].id == id) {
-            //버튼 클릭하고 다시 클릭했을 때 원복하는 경우
-            taskList[i].isStar = !taskList[i].isStar;
-            break;
+    if(id != null || id != "") {
+        alert("즐겨찾기 추가!");
+        for(let i=0; i < taskList.length; i++) {
+            if(taskList[i].id == id) {
+                //버튼 클릭하고 다시 클릭했을 때 원복하는 경우
+                taskList[i].isStar = !taskList[i].isStar;
+                break;
+            }
         }
+        filter();
     }
-    filter();
 }
 
 //done, ongoing 탭 내용
@@ -209,7 +220,6 @@ function filter(e) {
         underLine.style.top = e.currentTarget.offsetTop + e.currentTarget.offsetHeight - 6 + "px";
     }
     filterList = [];
-    console.log("mode : ", mode);
 
    if(mode === "ongoing") {
         //filter 아이템
@@ -228,6 +238,15 @@ function filter(e) {
     } else if(mode === "star") {
         for(let i=0; i < taskList.length; i++) {
             if(taskList[i].isStar === true) {
+                filterList.push(taskList[i]);
+            }
+        }
+    } else if(mode === "today") {
+        let currentDays = month + "." + date;
+        for(let i=0; i < taskList.length; i++) {
+            console.log("Today!! : ", taskList[i].days);
+            console.log("is : ", taskList[i].days == currentDays);
+            if(taskList[i].days == currentDays) {
                 filterList.push(taskList[i]);
             }
         }

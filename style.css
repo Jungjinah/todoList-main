@@ -8,14 +8,17 @@
 body {
     margin: 0;
     font-family: 'SOYOMapleBoldTTF';
+    background-color: #B199E5;
 }
 
 #box {
-    border: 3px solid black;
+    border: 3px solid #F6F6F6;
     border-radius: 20px 8px 20px 8px;
     width: 440px;
     height: 630px;
     margin: 40px auto;
+    background-color: #F6F6F6;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .btn-area {
@@ -32,12 +35,13 @@ body {
 .top-bar {
     display: flex;
     justify-content: space-between;
-    padding: 0px 8px;
+    padding: 10px 8px 0px 8px;
+    color: #003399;
 }
 
 #under-line {
     height: 4px;
-    background-color: pink;
+    background-color: #5B5AFF;
     position: absolute;
     width: 0;
     top: 0;
@@ -55,13 +59,24 @@ body {
     text-decoration: none;
 }
 
-.star:hover {
+.task-area a {
+    color : #B2CCFF !important;
+}
 
+.task-area a:focus {
+    color : #6799FF !important;
+}
+
+.task-area a:hover {
+    color : #6799FF !important;
 }
 
 /* main */
 #main {
     height: 470px;
+    padding-top: 10px;
+    overflow:auto;
+    overflow-x: hidden;
 }
 
 .task {
@@ -79,6 +94,27 @@ body {
 .task-star {
     border: 3px solid pink;
     border-radius: 5px;
+    font-size: 15px;
+}
+
+.btn-star:hover {
+    background-color : #FFD8D8;
+}
+
+.btn-delete {
+    font-size: 15px;
+}
+
+.btn-delete:hover {
+    background-color : #BDBDBD;
+}
+
+.btn-chk {
+    font-size: 15px;
+}
+
+.btn-chk:hover {
+    background-color : #E4F7BA;
 }
 
 /* footer */
